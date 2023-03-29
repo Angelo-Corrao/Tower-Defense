@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
 	public static EnemyManager Instance { get; set; }
 	public GameObject enemy;
 	public List<EnemyController> activeEnemies = new List<EnemyController>();
-	public UnityEvent<EnemyController> spawn;
+	public UnityEvent<EnemyController> inRange;
 
 	void Awake() {
 		if (Instance == null)
@@ -30,7 +30,12 @@ public class EnemyManager : MonoBehaviour
 			GameObject spawnedEnemy = Instantiate(enemy, mousePosition, enemyRotation);
 			EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
 			Add(enemyController);
-			spawn?.Invoke(enemyController);
+		}
+
+		foreach (EnemyController ec in activeEnemies) {
+			if (Vector3.Distance(ec.transform.position, Vector3.zero) < 15f) {
+				inRange?.Invoke(ec);
+			}
 		}
 	}
 

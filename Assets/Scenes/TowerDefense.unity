@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 4516063209236605070, guid: e978cf9c9ebe52f40bd34216fba0a180, type: 3}
   activeEnemies: []
-  spawn:
+  inRange:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1245756336}
@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9084ed54c1094c1428e5f99d7705839c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 1360750959104738024, guid: f211c6927c028b8429451f587d1547dd, type: 3}
 --- !u!1 &1516825665
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054618925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.008, y: 0.729, z: 0.261}
+  m_LocalPosition: {x: 0.008, y: 0.73, z: 0.261}
   m_LocalScale: {x: 0.46, y: -0.27, z: 0.99}
   m_ConstrainProportionsScale: 0
   m_Children: []

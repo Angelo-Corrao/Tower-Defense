@@ -1,12 +1,15 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject projectile;
     private EnemyController targettedEnemy;
     private float rotationSpeed = 5f;
     private float rotationCounterTimer = 0f;
     private Quaternion targetRotation;
+    private bool isTargettingEnemy = false;
     private Vector3 bho;
 	private Vector3 bho2;
 	void Update()
@@ -17,6 +20,12 @@ public class PlayerController : MonoBehaviour
         else {
             rotationCounterTimer -= Time.deltaTime * rotationSpeed;
         }
+    }
+
+    private void FixedUpdate() {
+        /*if (isTargettingEnemy) {
+            StartCoroutine(Shoot());
+        }*/
     }
 
     public void RotatePlayer(EnemyController ec) {
@@ -42,13 +51,13 @@ public class PlayerController : MonoBehaviour
 			float teLength = teDirection.magnitude;
 
 			if (eLength < teLength) {
-                Debug.Log("ok");
 			    targettedEnemy = ec;
 		    }
         }
         else {
 			targettedEnemy = ec;
 		}
+        isTargettingEnemy = true;
 
         Vector3 direction = targettedEnemy.transform.position - transform.position;
         bho = direction;
@@ -57,9 +66,16 @@ public class PlayerController : MonoBehaviour
         rotationCounterTimer = 1f;
     }
 
-	private void OnDrawGizmos() {
+    public IEnumerator Shoot() {
+        GameObject proj = Instantiate(projectile, Vector3.zero, Quaternion.identity);
+        proj.GetComponent<Rigidbody>().AddForce(Vector3.forward, ForceMode.Impulse);
+        yield return new WaitForSeconds(1);
+	}
+
+    private void OnDrawGizmos() {
 		Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, bho);
 		Gizmos.DrawLine(transform.position, bho2);
+        Gizmos.DrawWireSphere(Vector3.zero, 15f);
 	}
 }
