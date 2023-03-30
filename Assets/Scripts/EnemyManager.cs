@@ -28,15 +28,26 @@ public class EnemyManager : MonoBehaviour
 			enemyRotation.x = 0f;
 			enemyRotation.z = 0f;
 			GameObject spawnedEnemy = Instantiate(enemy, mousePosition, enemyRotation);
-			EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
-			Add(enemyController);
+			EnemyController ec = spawnedEnemy.GetComponent<EnemyController>();
+			Add(ec);
 		}
 
-		foreach (EnemyController ec in activeEnemies) {
+		if (Physics.CheckSphere(Vector3.zero, 15f, LayerMask.GetMask("Default"))) {
+			foreach (EnemyController ec in activeEnemies) {
+				Vector3 distance = ec.transform.position - Vector3.zero;
+				if (distance.magnitude < 15f)
+					inRange?.Invoke(ec);
+			}
+		}
+
+		/*foreach (EnemyController ec in activeEnemies) {
+			Vector3 distance = ec.transform.position - Vector3.zero;
+			if (distance.magnitude < 15f)
+				inRange?.Invoke(ec);
 			if (Vector3.Distance(ec.transform.position, Vector3.zero) < 15f) {
 				inRange?.Invoke(ec);
 			}
-		}
+		}*/
 	}
 
 	public void Add(EnemyController enemy) {
