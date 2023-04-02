@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1814011024473483937}
   - component: {fileID: 1409215319061154146}
   - component: {fileID: 565105051371032690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,21 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  died:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!54 &565105051371032690
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +146,7 @@ GameObject:
   - component: {fileID: 4469492291085263700}
   - component: {fileID: 9218476735451363663}
   - component: {fileID: 6545377578068996983}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
