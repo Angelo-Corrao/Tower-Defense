@@ -24,11 +24,10 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void Restart() {
-		foreach (EnemyController ec in EnemyManager.Instance.activeEnemies) {
+		foreach (EnemyController ec in EnemyManager.Instance.enemies) {
 			Destroy(ec.gameObject);
 		}
-		EnemyManager.Instance.activeEnemies.Clear();
-		EnemyManager.Instance.activeEnemiesInRange.Clear();
+		EnemyManager.Instance.enemies.Clear();
 		player.isTargettingEnemy = false;
 		player.rotationCounterTimer = 1;
 		player.transform.rotation = Quaternion.Euler(0, 0, 0);

@@ -9,8 +9,8 @@ public class EnemyManager : MonoBehaviour
 	public static EnemyManager Instance { get; set; }
 	public GameObject enemy;
 	public GameObject spawnArea;
-	public List<EnemyController> activeEnemies = new List<EnemyController>();
-	public List<EnemyController> activeEnemiesInRange = new List<EnemyController>();
+	public List<EnemyController> enemies = new List<EnemyController>();
+	public Collider[] enemiesInRangeColliders;
 	public UnityEvent<EnemyController> inRange;
 	public bool canCheck = true;
 
@@ -47,23 +47,19 @@ public class EnemyManager : MonoBehaviour
 	}
 
 	public void Add(EnemyController enemy) {
-		activeEnemies.Add(enemy);
+		enemies.Add(enemy);
 	}
 
     public void Remove(EnemyController enemy) {
-        activeEnemies.Remove(enemy);
-		activeEnemiesInRange.Remove(enemy);
+        enemies.Remove(enemy);
     }
 
 	public IEnumerator CheckEnemiesInRange(float seconds) {
 		canCheck = false;
 		yield return new WaitForSeconds(seconds);
-		if (Physics.CheckSphere(Vector3.zero, 15f, LayerMask.GetMask("Enemy"))) {
-			Debug.Log("ok");
-			foreach (EnemyController ec in activeEnemiesInRange) {
-				inRange?.Invoke(ec);
-			}
-		}
+		enemiesInRangeColliders = Physics.OverlapSphere(Vector3.zero, 15f, LayerMask.GetMask("Enemy"));
+		foreach (Collider c in enemiesInRangeColliders)
+			inRange?.Invoke(c.gameObject.GetComponent<EnemyController>());
 		canCheck = true;
 	}
 }

@@ -10,7 +10,6 @@ public class EnemyController : MonoBehaviour
 	public float speed = 0.5f;
 	public static event Action died;
     private CharacterController cc;
-	private bool wasAlreadyInRange = false;
 
 	private void Awake() {
 		cc = GetComponent<CharacterController>();
@@ -19,11 +18,6 @@ public class EnemyController : MonoBehaviour
 	void Update()
     {
 		cc.Move(transform.forward * speed * Time.deltaTime);
-
-		if (Physics.CheckSphere(Vector3.zero, 15f, LayerMask.GetMask("Enemy")) && !wasAlreadyInRange) {
-			EnemyManager.Instance.activeEnemiesInRange.Add(this);
-			wasAlreadyInRange = true;
-		}
 	}
 
 	private void OnCollisionEnter(Collision collision) {

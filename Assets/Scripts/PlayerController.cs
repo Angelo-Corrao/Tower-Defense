@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 	public void EnemyKilled() {
 		isTargettingEnemy = false;
 		if (Physics.CheckSphere(Vector3.zero, 15f, LayerMask.GetMask("Enemy"))) {
-			foreach (EnemyController ec in EnemyManager.Instance.activeEnemies) {
+			foreach (EnemyController ec in EnemyManager.Instance.enemies) {
 				Vector3 distance = ec.transform.position - Vector3.zero;
 				if (distance.magnitude < 15f)
 					RotatePlayer(ec);
